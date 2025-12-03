@@ -1,0 +1,71 @@
+{% extends 'layout.html' %}
+{% block content %}
+        <div class="container">
+            <div style="margin-bottom:10px;" class="clearfix">
+
+                <div style="float:right;width:300px">
+                    <form method="get">
+                      <div class="input-group">
+                      <input type="text" name="q" class="form-control" placeholder="Search for..." value="{{search_data}}">
+                      <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit">
+                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                        </button>
+                      </span>
+                    </div><!-- /input-group -->
+                    </form>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                    机票列表
+                </div>
+
+                <!-- Table -->
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>出发—终点</th>
+                      <th>日期</th>
+                      <th>航空公司</th>
+                      <th>飞机型号</th>
+                      <th>出发机场</th>
+                      <th>出发时间</th>
+                      <th>到达时间</th>
+                      <th>到达机场</th>
+                      <th>票价</th>
+                      <th>信息来源</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for obj in queryset %}
+                    <tr>
+                      <td >{{ obj.id }}</td>
+                      <td>{{ obj.start_end }}</td>
+                      <td>{{ obj.time_day }}</td>
+                      <td>{{ obj.airline }}</td>
+                      <td>{{ obj.vecto|slice:":14"}}</td>
+                      <td>{{ obj.start_location }}</td>
+                      <td>{{ obj.start_time }}</td>
+                      <td>{{ obj.end_time }}</td>
+                      <td>{{ obj.end_location }}</td>
+                      <td>{{ obj.floor_proce }}</td>
+                      <td>{{ obj.url }}</td>
+
+
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            <nav aria-label="..." class="clearfix">
+              <ul class="pagination" style="float:left">
+                {{  page_string }}
+              </ul>
+           </nav>
+        </div>
+{% endblock %}

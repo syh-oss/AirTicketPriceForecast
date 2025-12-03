@@ -1,0 +1,83 @@
+{% block content %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>机票价格预测</title>
+    <!-- 引入Bootstrap样式 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    <style>
+        .form-group {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">机票价格预测</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="time_diff_str">航班耗时（分钟）:</label>
+                        <input type="number" class="form-control" id="time_diff_str" name="time_diff_str" value="{{ feature_values.time_diff_str }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="s_hour">出发小时:</label>
+                        <input type="number" class="form-control" id="s_hour" name="s_hour" value="{{ feature_values.s_hour }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="s_min">出发分钟:</label>
+                        <input type="number" class="form-control" id="s_min" name="s_min" value="{{ feature_values.s_min }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="d_hour">到达小时:</label>
+                        <input type="number" class="form-control" id="d_hour" name="d_hour" value="{{ feature_values.d_hour }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="d_min">到达分钟:</label>
+                        <input type="number" class="form-control" id="d_min" name="d_min" value="{{ feature_values.d_min }}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="date_m">月份:</label>
+                        <input type="number" class="form-control" id="date_m" name="date_m" value="{{ feature_values.date_m }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="date_d">日期:</label>
+                        <input type="number" class="form-control" id="date_d" name="date_d" value="{{ feature_values.date_d }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="company_encoded">航空公司:</label>
+                        <input type="number" class="form-control" id="company_encoded" name="company_encoded" value="{{ feature_values.company_encoded }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="sPlace_encoded">出发机场:</label>
+                        <input type="number" class="form-control" id="sPlace_encoded" name="sPlace_encoded" value="{{ feature_values.sPlace_encoded }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="dPlace_encoded">到达机场:</label>
+                        <input type="number" class="form-control" id="dPlace_encoded" name="dPlace_encoded" value="{{ feature_values.dPlace_encoded }}">
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary" name="predict_button">预测价格</button>
+        </form>
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5 class="card-title">预测价格</h5>
+            </div>
+            <div class="card-body">
+                <p><strong>预测价格:</strong> ${{ predicted_price }}</p>
+            </div>
+        </div>
+    </div>
+    <!-- 引入Bootstrap JavaScript文件 -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+{% endblock %}
